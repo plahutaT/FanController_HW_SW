@@ -30,35 +30,39 @@ void LCD_init(){
     //******************************************************************//
     
     //---------- Wait for more than 40ms ----------
-    __delay_ms(60);
+    __delay_ms(80);
     
-    //---------- Load 0b0011 in command mode ----------
-    LCD_D7_LAT = 0; LCD_D6_LAT = 0; LCD_D5_LAT = 1; LCD_D4_LAT = 1;
     
-    //---------- Send a clock pulse ----------
-    LCD_pulse_clock();
+    for (uint8_t i = 0; i < 6; i++) {
+        
+        //---------- Load 0b0011 in command mode ----------
+        LCD_D7_LAT = 0; LCD_D6_LAT = 0; LCD_D5_LAT = 1; LCD_D4_LAT = 1;
+
+        //---------- Send a clock pulse ----------
+        LCD_pulse_clock();
+        
+        __delay_ms(5);
     
-    //---------- Wait for more than 4.1ms ----------
-    __delay_ms(6);
+    }
     
-    //---------- Send a clock pulse ----------
-    LCD_pulse_clock();
     
-    //---------- Wait for more than 100us ----------
-    __delay_us(150);
-    
-    //---------- Send a clock pulse ----------
-    LCD_pulse_clock();
-    
-    //---------- Load 0b0010 in command mode(4-bit mode start) ----------
+    //---------- Load 0b0010 in command mode ----------
     LCD_D7_LAT = 0; LCD_D6_LAT = 0; LCD_D5_LAT = 1; LCD_D4_LAT = 0;
     
     //---------- Send a clock pulse ----------
     LCD_pulse_clock();
     
+    __delay_ms(1);
+    
+    
     //---------- Configure important settings ----------
     LCD_write_command(LCD_CMD_FUNCTION_SET);  //Function Set(4-bit, 2 line, 5x8 dots)
+    __delay_ms(1);
     LCD_write_command(LCD_display_control);   //Display On/Off Control(Display on, cursor off, blinking off)
+    __delay_ms(1);
     LCD_write_command(LCD_entry_mode);        //Entry Mode Set(Increment, shift off)
+    __delay_ms(1);
     LCD_clear();                              //Clear the display
  }
+    
+    

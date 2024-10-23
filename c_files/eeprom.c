@@ -4,11 +4,12 @@ void write_internal_eeprom(uint8_t address, uint8_t data)
 {
 	//Write the address
 	EEADR = address;
+    //EEADRH = 0x00;
 
 	//Write the data
 	EEDATA = data;
 
-	//Point to data memory
+	//Point to data memory not program memoty
 	EECON1bits.EEPGD = 0;
 
 	//Access data EEPROM memory
@@ -27,22 +28,23 @@ void write_internal_eeprom(uint8_t address, uint8_t data)
 	//Initiate write
 	EECON1bits.WR = 1;
 
-	//Global interrupt enable
-	GIE = 1;
-
-	//Wait till write is complete
+    //Wait till write is complete
 	while (!PIR2bits.EEIF);
 
 	//Disable the flag
 	PIR2bits.EEIF = 0;
+    
+    //Global interrupt enable
+	GIE = 1;
 }
 
-unsigned char read_internal_eeprom(uint8_t address)
+uint8_t read_internal_eeprom(uint8_t address)
 {
 	//Write the address, from where data has to be read
 	EEADR = address;
+    //EEADRH = 0x00;
 
-	//Inhibits write cycles to Flash program/data EEPROM
+	//Disable write cycles to data EEPROM
 	EECON1bits.WREN = 0;
 
 	//Point to data memory

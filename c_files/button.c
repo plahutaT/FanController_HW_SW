@@ -1,6 +1,6 @@
 #include "button.h"
 
-uint16_t ticks = 0;
+uint32_t ticks = 0;
 //uint8_t previous_state = 0;
 
 
