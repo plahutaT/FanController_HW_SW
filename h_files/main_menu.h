@@ -14,11 +14,19 @@
 #include "button.h"
 
 extern uint8_t Ref_temp;
-extern volatile uint16_t multitaskTimer;
+extern volatile uint32_t multitaskTimer;
 extern uint8_t Main_menu_F;
-uint16_t TicksM = 0;
+extern uint8_t Main_menu2_F;
+extern uint8_t DC_fan_F;
+extern uint8_t DC_fan_running_F;
+
+
+uint32_t TicksM = 0;
 
 void main_menu_func(void);
+//void first_main_menu_func(void);
+void display_menu (uint8_t flags);
+
 
 #endif	/* MAIN_MENU_H */
 

@@ -16,7 +16,7 @@
 #define BUTTON2 PORTAbits.RA3
 
 extern volatile uint8_t debounce_count;
-extern volatile uint16_t multitaskTimer;
+extern volatile uint32_t multitaskTimer;
 
 uint8_t Get_Button_State(void);
 uint8_t Get_Button_Press(void);
